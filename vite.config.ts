@@ -51,20 +51,16 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    outDir: 'build', // <-- changed to dist for Vercel default
-  
+    outDir: 'build',
+    assetsDir: 'assets',
     chunkSizeWarningLimit: 700, // reduce noise (kB)
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (!id.includes('node_modules')) return;
-          // common big vendors -> separate chunks
-          if (id.includes('react') || id.includes('react-dom')) return 'vendor-react';
-          if (id.includes('recharts')) return 'vendor-recharts';
-          if (id.includes('@radix-ui')) return 'vendor-radix';
-          if (id.includes('lucide-react')) return 'vendor-icons';
-          // fallback vendor chunk for other node_modules
-          return 'vendor';
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-radix': ['@radix-ui/react-accordion', '@radix-ui/react-alert-dialog', '@radix-ui/react-aspect-ratio', '@radix-ui/react-avatar', '@radix-ui/react-checkbox', '@radix-ui/react-collapsible', '@radix-ui/react-context-menu', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-hover-card', '@radix-ui/react-label', '@radix-ui/react-menubar', '@radix-ui/react-navigation-menu', '@radix-ui/react-popover', '@radix-ui/react-progress', '@radix-ui/react-radio-group', '@radix-ui/react-scroll-area', '@radix-ui/react-select', '@radix-ui/react-separator', '@radix-ui/react-slider', '@radix-ui/react-slot', '@radix-ui/react-switch', '@radix-ui/react-tabs', '@radix-ui/react-toggle', '@radix-ui/react-toggle-group', '@radix-ui/react-tooltip'],
+          'vendor-recharts': ['recharts'],
+          'vendor-icons': ['lucide-react']
         }
       }
     }
