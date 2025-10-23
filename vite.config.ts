@@ -51,7 +51,8 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    outDir: 'dist', // <-- changed to dist for Vercel default
+    outDir: 'build', // <-- changed to dist for Vercel default
+  
     chunkSizeWarningLimit: 700, // reduce noise (kB)
     rollupOptions: {
       output: {
