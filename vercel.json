@@ -8,6 +8,6 @@
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" } // required if using React Router + BrowserRouter
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
